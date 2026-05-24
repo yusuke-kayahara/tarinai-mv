@@ -4,7 +4,7 @@
   { "type": "self", "text": "かわいすぎ", "date": "2026/05/22（木）", "preloaded": true },
   { "type": "self", "text": "ごめん、明日からしばらく会えないかも\n基地にもたぶんもう行けない\n\n約束守れなくて本当にごめん\n和とバンドやりたかった", "date": "2026/05/23（金）" },
   { "type": "other", "text": "どうしたの？" },
-  { "type": "self", "text": "大丈夫？" },
+  { "type": "other", "text": "大丈夫？" },
   { "type": "other", "text": "何かあった？" },
-  { "missedCall": "12:34"}
+  { "missedCall": ":34"}
 ]
