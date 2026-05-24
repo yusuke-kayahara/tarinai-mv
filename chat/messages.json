@@ -1,9 +1,10 @@
 [
   { "type": "other", "image": "img/neko.jpg", "date": "2026/05/22（木）", "preloaded": true },{ "type": "other", "text": "ほんとに！アンコールやばかった", "date": "2026/05/22（木）", "preloaded": true },
   { "type": "other", "text": "基地の裏にねこいた！", "date": "2026/05/22（木）", "preloaded": true },
-  { "type": "self", "text": "基地の裏にねこいた！", "date": "2026/05/22（木）", "preloaded": true },
-  { "type": "self", "text": "hoge", "date": "2026/05/23（金）" },
-  { "type": "other", "text": "fuga" },
-  { "type": "self", "text": "piyo" },
-  { "type": "other", "text": "hogehoge" }
+  { "type": "self", "text": "かわいすぎ", "date": "2026/05/22（木）", "preloaded": true },
+  { "type": "self", "text": "ごめん、明日からしばらく会えないかも\n基地にもたぶんもう行けない\n\n約束守れなくて本当にごめん\n和とバンドやりたかった", "date": "2026/05/23（金）" },
+  { "type": "other", "text": "どうしたの？" },
+  { "type": "self", "text": "大丈夫？" },
+  { "type": "other", "text": "何かあった？" }
+  
 ]
