@@ -158,6 +158,22 @@
       pointer-events: none;
       transition: opacity 0.5s;
     }
+    .date-separator {
+      text-align: center;
+      margin: 8px 0;
+    }
+    .date-separator span {
+      background: rgba(0,0,0,0.2);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 3px 12px;
+      border-radius: 10px;
+    }
+    .message.preloaded {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
   </style>
 </head>
 <body>
@@ -202,21 +218,45 @@
     // 外部ファイルからメッセージ読み込み
     fetch('messages.json')
       .then(function(res) { return res.json(); })
-      .then(function(data) { messageData = data; });
+      .then(function(data) {
+        messageData = data;
+        // preloaded メッセージを即時表示
+        while (currentIndex < messageData.length && messageData[currentIndex].preloaded) {
+          renderMessage(messageData[currentIndex], true);
+          currentIndex++;
+        }
+        var container = document.getElementById('chatContainer');
+        container.scrollTop = container.scrollHeight;
+      });
 
     function getDisplayType(originalType) {
       if (!reversed) return originalType;
       return originalType === 'self' ? 'other' : 'self';
     }
 
-    function addMessage() {
-      if (currentIndex >= messageData.length) return;
+    var lastDate = null;
 
-      var data = messageData[currentIndex];
+    function renderDateSeparator(dateStr) {
+      var sep = document.createElement('div');
+      sep.className = 'date-separator';
+      var span = document.createElement('span');
+      span.textContent = dateStr;
+      sep.appendChild(span);
+      messagesEl.appendChild(sep);
+    }
+
+    function renderMessage(data, isPreloaded) {
+      // 日付セパレータ
+      if (data.date && data.date !== lastDate) {
+        lastDate = data.date;
+        renderDateSeparator(data.date);
+      }
+
       var displayType = getDisplayType(data.type);
 
       var messageEl = document.createElement('div');
       messageEl.className = 'message ' + displayType;
+      if (isPreloaded) messageEl.classList.add('preloaded');
 
       var bubbleEl = document.createElement('div');
       bubbleEl.className = 'bubble';
@@ -238,6 +278,12 @@
 
       messageEl.appendChild(bubbleEl);
       messagesEl.appendChild(messageEl);
+    }
+
+    function addMessage() {
+      if (currentIndex >= messageData.length) return;
+
+      renderMessage(messageData[currentIndex], false);
 
       // スクロールを最下部に
       var container = document.getElementById('chatContainer');
