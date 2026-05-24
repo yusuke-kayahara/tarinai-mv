@@ -2,10 +2,10 @@
   { "type": "self", "text": "昨日のライブよかったね", "date": "2026/05/22（木）", "preloaded": true },
   { "type": "other", "text": "ほんとに！アンコールやばかった", "date": "2026/05/22（木）", "preloaded": true },
   { "type": "self", "text": "写真撮った？", "date": "2026/05/22（木）", "preloaded": true },
-  { "type": "other", "image": "https://picsum.photos/300/200?random=11", "text": "これ！", "date": "2026/05/22（木）", "preloaded": true },
+  { "type": "other", "image": "img/neko.jpg", "text": "これ！", "date": "2026/05/22（木）", "preloaded": true },
   { "type": "self", "text": "hoge", "date": "2026/05/23（金）" },
   { "type": "other", "text": "fuga" },
   { "type": "self", "text": "piyo" },
   { "type": "other", "text": "hogehoge" },
-  { "type": "self", "image": "https://picsum.photos/300/200?random=10" }
+  { "type": "self", "image": "img/neko.jpg" }
 ]

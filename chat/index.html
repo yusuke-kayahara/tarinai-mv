@@ -41,16 +41,7 @@
       height: 32px;
       border-radius: 50%;
       background: #ccc;
-    }
-    .view-toggle {
-      margin-left: auto;
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.4);
-      color: #fff;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      cursor: pointer;
+      object-fit: cover;
     }
     .chat-container {
       position: fixed;
@@ -179,9 +170,8 @@
 <body>
   <div class="chat-header">
     <span class="back">&lt;</span>
-    <div class="avatar"></div>
-    <span id="headerName">相手</span>
-    <button class="view-toggle" id="viewToggle">理花View</button>
+    <img class="avatar" id="avatar" src="img/nagomi.PNG" alt="">
+    <span id="headerName">和</span>
   </div>
 
   <div class="chat-container" id="chatContainer">
@@ -202,17 +192,18 @@
 
     const messagesEl = document.getElementById('messages');
     const tapHint = document.getElementById('tapHint');
-    const viewToggle = document.getElementById('viewToggle');
     const headerName = document.getElementById('headerName');
+    const avatar = document.getElementById('avatar');
 
     // URLパラメータでView指定
     const params = new URLSearchParams(window.location.search);
     if (params.get('view') === 'kazu') {
       reversed = true;
-      viewToggle.textContent = '和View';
       headerName.textContent = '理花';
+      avatar.src = 'img/rika.JPG';
     } else {
       headerName.textContent = '和';
+      avatar.src = 'img/nagomi.PNG';
     }
 
     // 外部ファイルからメッセージ読み込み
@@ -295,16 +286,6 @@
         tapHint.style.opacity = '0';
       }
     }
-
-    // View切替ボタン
-    viewToggle.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (reversed) {
-        window.location.search = '';
-      } else {
-        window.location.search = '?view=kazu';
-      }
-    });
 
     document.body.addEventListener('click', addMessage);
     document.body.addEventListener('touchend', function(e) {
