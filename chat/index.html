@@ -259,12 +259,12 @@
         bubbleEl.appendChild(img);
         if (data.text) {
           var textEl = document.createElement('p');
-          textEl.textContent = data.text;
+          textEl.innerHTML = data.text.replace(/\n/g, '<br>');
           textEl.style.marginTop = '6px';
           bubbleEl.appendChild(textEl);
         }
       } else {
-        bubbleEl.textContent = data.text;
+        bubbleEl.innerHTML = data.text.replace(/\n/g, '<br>');
       }
 
       messageEl.appendChild(bubbleEl);
