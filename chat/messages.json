@@ -1,6 +1,7 @@
 [
   { "type": "self", "text": "hoge" },
   { "type": "other", "text": "fuga" },
-  { "type": "self", "text": "piyo" },
-  { "type": "other", "text": "hogehoge" }
+  { "type": "self", "image": "https://picsum.photos/300/200?random=10" },
+  { "type": "other", "text": "hogehoge" },
+  { "type": "other", "image": "https://picsum.photos/300/200?random=11", "text": "これ見て" }
 ]
