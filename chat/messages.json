@@ -1,5 +1,5 @@
 [
-  { "type": "self", "image": "今日何時集合にする？", "date": "2026/05/21（水）", "preloaded": true },
+  { "type": "self", "text": "今日何時集合にする？", "date": "2026/05/21（水）", "preloaded": true },
   { "type": "other", "text": "17時集合とかどうかな？", "date": "2026/05/21（水）", "preloaded": true },
   { "type": "self", "text": "大丈夫！ギター持ってくね！", "date": "2026/05/21（水）", "preloaded": true },
   { "type": "other", "text": "うん！たのしみ！", "date": "2026/05/21（水）", "preloaded": true },
