@@ -1,10 +1,16 @@
 [
-  { "type": "other", "image": "img/neko.jpg", "date": "2026/05/22（木）", "preloaded": true },{ "type": "other", "text": "ほんとに！アンコールやばかった", "date": "2026/05/22（木）", "preloaded": true },
+  { "type": "self", "image": "今日何時集合にする？", "date": "2026/05/21（水）", "preloaded": true },
+  { "type": "other", "text": "17時集合とかどうかな？", "date": "2026/05/21（水）", "preloaded": true },
+  { "type": "self", "text": "大丈夫！ギター持ってくね！", "date": "2026/05/21（水）", "preloaded": true },
+  { "type": "other", "text": "うん！たのしみ！", "date": "2026/05/21（水）", "preloaded": true },
+  { "type": "other", "image": "img/neko.jpg", "date": "2026/05/22（木）", "preloaded": true },
   { "type": "other", "text": "基地の裏にねこいた！", "date": "2026/05/22（木）", "preloaded": true },
   { "type": "self", "text": "かわいすぎ", "date": "2026/05/22（木）", "preloaded": true },
-  { "type": "self", "text": "ごめん、明日からしばらく会えないかも\n基地にもたぶんもう行けない\n\n約束守れなくて本当にごめん\n和とバンドやりたかった", "date": "2026/05/23（金）" },
+  { "type": "self", "text": "ごめん、明日からしばらく会えない\n基地にももう行けない\n私は大丈夫だから気にしないで", "date": "2026/05/23（金）" },
+  { "type": "self", "text": "約束守れなくて本当にごめん\n和とバンドやりたかった", "date": "2026/05/23（金）" },
   { "type": "other", "text": "どうしたの？" },
   { "type": "other", "text": "大丈夫？" },
   { "type": "other", "text": "何かあった？" },
-  { "missedCall": ":34"}
+  { "missedCall": "10:34"},
+  { "missedCall": "10:36"}
 ]
