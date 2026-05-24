@@ -1,0 +1,6 @@
+[
+  { "type": "self", "text": "hoge" },
+  { "type": "other", "text": "fuga" },
+  { "type": "self", "text": "piyo" },
+  { "type": "other", "text": "hogehoge" }
+]

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>着信</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+      background: #1a1a2e;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .call-screen {
+      width: 100%;
+      max-width: 400px;
+      height: 100vh;
+      background: linear-gradient(180deg, #2d2d44 0%, #1a1a2e 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 20px 60px;
+      position: relative;
+    }
+    .caller-info {
+      text-align: center;
+    }
+    .caller-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #555;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+    }
+    .caller-name {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .call-status {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .call-type {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+    }
+    .call-type .icon {
+      font-size: 1rem;
+    }
+    .actions {
+      display: flex;
+      gap: 60px;
+      align-items: center;
+    }
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .action-btn .circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .action-btn .circle:active {
+      transform: scale(0.9);
+    }
+    .decline .circle {
+      background: #ff3b30;
+    }
+    .accept .circle {
+      background: #34c759;
+    }
+    .action-btn .label {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.7rem;
+    }
+    .top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+    }
+    /* リンギングアニメーション */
+    .caller-avatar::before,
+    .caller-avatar::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(52, 199, 89, 0.4);
+      animation: ring 2s ease-out infinite;
+    }
+    .caller-avatar::before {
+      width: 100px;
+      height: 100px;
+      animation-delay: 0s;
+    }
+    .caller-avatar::after {
+      width: 120px;
+      height: 120px;
+      animation-delay: 0.5s;
+    }
+    .caller-avatar {
+      position: relative;
+    }
+    @keyframes ring {
+      0% {
+        transform: scale(0.8);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.3);
+        opacity: 0;
+      }
+    }
+    /* スライドで応答 */
+    .slide-area {
+      width: 100%;
+      max-width: 300px;
+      margin-top: 40px;
+    }
+    .slide-bar {
+      background: rgba(255,255,255,0.1);
+      border-radius: 30px;
+      padding: 6px;
+      position: relative;
+      height: 52px;
+      display: flex;
+      align-items: center;
+    }
+    .slide-thumb {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #34c759;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.1rem;
+      z-index: 2;
+      cursor: grab;
+    }
+    .slide-text {
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      pointer-events: none;
+      animation: slideHint 2s infinite;
+    }
+    @keyframes slideHint {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="call-screen">
+    <div class="top-bar">
+      <span>LINE</span>
+      <span>音声通話</span>
+    </div>
+
+    <div class="caller-info">
+      <div class="caller-avatar">☎</div>
+      <div class="caller-name" id="callerName">和</div>
+      <div class="call-status">着信中...</div>
+      <div class="call-type">
+        <span class="icon">📞</span>
+        <span>LINE 音声通話</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="actions">
+        <div class="action-btn decline">
+          <div class="circle">✕</div>
+          <span class="label">拒否</span>
+        </div>
+        <div class="action-btn accept">
+          <div class="circle">📞</div>
+          <span class="label">応答</span>
+        </div>
+      </div>
+      <div class="slide-area">
+        <div class="slide-bar">
+          <div class="slide-thumb">▶</div>
+          <div class="slide-text">スライドで応答</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
