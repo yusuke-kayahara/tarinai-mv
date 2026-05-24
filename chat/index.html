@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Chat</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+      background: #7494c0;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .chat-header {
+      background: #5b7a9e;
+      color: #fff;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+    .chat-header .back {
+      font-size: 1.2rem;
+    }
+    .chat-header .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ccc;
+    }
+    .chat-container {
+      padding: 70px 12px 80px;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .messages {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .message {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: messageIn 0.3s ease forwards;
+    }
+    @keyframes messageIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .message.other {
+      justify-content: flex-start;
+    }
+    .message.self {
+      justify-content: flex-end;
+    }
+    .bubble {
+      max-width: 70%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .message.other .bubble {
+      background: #fff;
+      color: #1a1a1a;
+      border-bottom-left-radius: 4px;
+    }
+    .message.self .bubble {
+      background: #5bba47;
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .input-area {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #f0f0f0;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-top: 1px solid #ddd;
+    }
+    .input-area .input-box {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      color: #999;
+    }
+    .input-area .send-btn {
+      width: 32px;
+      height: 32px;
+      background: #5bba47;
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tap-hint {
+      position: fixed;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.75rem;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-header">
+    <span class="back">&lt;</span>
+    <div class="avatar"></div>
+    <span>相手</span>
+  </div>
+
+  <div class="chat-container" id="chatContainer">
+    <div class="messages" id="messages"></div>
+  </div>
+
+  <div class="input-area">
+    <div class="input-box">Aa</div>
+    <button class="send-btn">▶</button>
+  </div>
+
+  <div class="tap-hint" id="tapHint">画面をタップしてください</div>
+
+  <script>
+    const messageData = [
+      { type: 'self', text: 'hoge' },
+      { type: 'other', text: 'fuga' },
+      { type: 'self', text: 'piyo' },
+      { type: 'other', text: 'hogehoge' },
+    ];
+
+    let currentIndex = 0;
+    const messagesEl = document.getElementById('messages');
+    const tapHint = document.getElementById('tapHint');
+
+    function addMessage() {
+      if (currentIndex >= messageData.length) return;
+
+      const data = messageData[currentIndex];
+      const messageEl = document.createElement('div');
+      messageEl.className = `message ${data.type}`;
+
+      const bubbleEl = document.createElement('div');
+      bubbleEl.className = 'bubble';
+      bubbleEl.textContent = data.text;
+
+      messageEl.appendChild(bubbleEl);
+      messagesEl.appendChild(messageEl);
+
+      currentIndex++;
+
+      if (currentIndex >= messageData.length) {
+        tapHint.style.opacity = '0';
+      }
+    }
+
+    document.body.addEventListener('click', addMessage);
+    document.body.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      addMessage();
+    });
+  </script>
+</body>
+</html>
